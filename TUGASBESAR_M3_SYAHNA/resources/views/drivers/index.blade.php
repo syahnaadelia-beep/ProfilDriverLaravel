@@ -265,19 +265,23 @@
                                             Edit
                                         </a>
 
-                                        <form
-                                            action="{{ route('drivers.destroy', $driver->id) }}"
-                                            method="POST"
-                                            onsubmit="return confirm('Yakin ingin menghapus data driver ini?')"
-                                        >
-                                            @csrf
-                                            @method('DELETE')
-                                            <button
-                                                type="submit"
-                                                class="rounded border border-mono-300 px-3 py-1.5 text-xs hover:border-mono-900 hover:bg-mono-900 hover:text-white"
-                                            >
-                                                Hapus
-                                            </button>
+                                        @if(auth()->user()->role === 'admin')
+    <form
+        action="{{ route('drivers.destroy', $driver->id) }}"
+        method="POST"
+        onsubmit="return confirm('Yakin ingin menghapus data driver ini?')"
+    >
+        @csrf
+        @method('DELETE')
+
+        <button
+            type="submit"
+            class="rounded border border-mono-300 px-3 py-1.5 text-xs hover:border-mono-900"
+        >
+            Hapus
+        </button>
+    </form>
+@endif
                                         </form>
                                     </div>
                                 </td>
